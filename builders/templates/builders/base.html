@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load sitetree %}
 
 {% block css %}
 {{ block.super }}
@@ -14,6 +15,7 @@
 
 
 {% block content %}
+{% sitetree_breadcrumbs from 'builders' %}
 {% block builders_header %}
 <div class="row builder-header-row">
     <div class="columns small-12 builder-header">

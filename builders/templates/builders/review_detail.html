@@ -1,0 +1,88 @@
+{% extends "builders/base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% load avatar_tags %}
+{% load builders %}
+{% load humanize %}
+
+{% block builder_name %}
+{{ block.super}} &mdash; <a href="{{review.get_absolute_url}}">{{ review.costume_name }}</a>
+{% endblock builder_name %}
+
+{% block builders_content %}
+{{ block.super }}
+<div class="row">
+    <div class="columns small-12 medium-8">
+        <div class="panel">
+            <article>
+                <header>
+                    <h3 class="review-costume-name">
+                        {{ review.costume_name }}
+                    </h3>
+                    <div class="review-costume-info">
+                        by
+                        <span class="author">
+                            <a href="{{ review.user.get_absolute_url }}" class="user-link">
+                            {{ review.user.username }}
+                            </a>
+                        </span>
+                        <span class="date">
+                            <time datetime="{{ review.created|date:'Y-m-d' }}T{{ review.created|date:'H:i:sO' }}">{{ review.created|naturaltime }}</time>
+                            {% if review.edited != review.created %}
+                            <span class="edited">
+                            (edited
+                            <time datetime="{{ review.edited|date:'Y-m-d' }}T{{ review.edited|date:'H:i:sO' }}">{{ review.edited|naturaltime }}</time>)
+                            </span>
+                            {% endif %}
+                        </span>
+                    </div>
+                </header>
+                <hr>
+                <div class="markdown">
+                    {{ review.text.rendered|safe }}
+                </div>
+            </article>
+        </div>
+    </div>
+    <div class="columns small-12 medium-4">
+        <div class="panel">
+            <h5>Rating</h5>
+            <hr>
+            <table class="review-ratings">
+                <tbody>
+                    <tr>
+                        <th>Overall</th>
+                        <td>{{ review.rating.overall|stars }}</td>
+                    </tr>
+                    <tr>
+                        <th>Construction</th>
+                        <td>{{ review.rating.construction|stars }}</td>
+                    </tr>
+                    <tr>
+                        <th>Communication</th>
+                        <td>{{ review.rating.communication|stars }}</td>
+                    </tr>
+                    <tr>
+                        <th>Timeliness</th>
+                        <td>{{ review.rating.timeliness|stars }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel">
+            <h5>Photos</h5>
+            <hr>
+            <div class="review-gallery">
+                <ul class="small-block-grid-3 medium-block-grid-2">
+                    {% for photo in review.photos.all %}
+                    <li><a href="{{ photo.image.url }}"><img src="{{ photo.image.thumb.url }}" alt="{{ photo.caption }}"></a></li>
+                    {% empty %}
+                    <li>No photos</li>
+                    {% endfor %}
+                </ul>
+            </div><!-- /.review-gallery -->
+        </div>
+    </div>
+</div>
+
+{% endblock builders_content %}

@@ -1,0 +1,34 @@
+{% extends "builders/base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% load builders %}
+
+{% block builders_header %}
+{% endblock builders_header %}
+
+{% block builders_content %}
+<div class="row">
+    <div class="columns small-12 builder-list">
+        <ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
+        {% for builder in builders %}
+            <li class="builder-entry">
+                <a href="{{ builder.get_absolute_url }}">
+                    <div class="builder-entry-text">
+                        <div class="builder-name">
+                            {{ builder.name }}
+                        </div><!-- /.builder-name -->
+                        <div class="builder-rating">
+                            {{ builder.overall|stars }}
+                        </div><!-- /.builder-rating -->
+                        <div class="builder-status">
+                            {{ builder.status }}
+                        </div><!-- /.builder-status -->
+                    </div><!-- /.builder-entry-text -->
+                    <img src="{{ builder.thumb.square.url }}">
+                </a>
+            </li>
+        {% endfor %}
+        </ul><!-- /.builder-list -->
+    </div>
+</div>
+{% endblock builders_content %}

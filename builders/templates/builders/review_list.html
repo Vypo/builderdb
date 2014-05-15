@@ -1,0 +1,20 @@
+{% extends "builders/base.html" %}
+
+{% block builders_content %}
+{{ block.super }}
+
+<div class="row">
+    <div class="columns small-12">
+        <div class="panel">
+            <h5>All Reviews</h5>
+            {% for review in reviews %}
+            <hr>
+            {% include 'builders/review_summary_snippet.html' %}
+            {% empty %}
+            <hr>
+            There aren't any reviews yet. Why not <a href="#">write one</a>?
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock builders_content %}

@@ -1,0 +1,23 @@
+{% extends 'foundation/base.html' %}
+{% load staticfiles %}
+{% load sitetree %}
+{% load foundation_tags %}
+
+{% block foundation_js %}
+{{ block.super }}
+{% include 'autocomplete_light/static.html' %}
+{% foundation_js 'topbar' %}
+{% block js %}{% endblock js %}
+{% endblock foundation_js %}
+
+{% block title %}
+{% endblock title %}
+
+{% block base_body %}
+{% sitetree_menu from 'fb' include 'root' %}
+{% sitetree_breadcrumbs from 'fb' %}
+{% block content %}
+
+{% endblock content %}
+
+{% endblock base_body %}

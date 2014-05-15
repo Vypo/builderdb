@@ -1,0 +1,11 @@
+# Python
+*.pyc
+*.pyo
+
+# Vim
+*.swp
+
+# Development Files
+db.sqlite3
+venv/
+media/

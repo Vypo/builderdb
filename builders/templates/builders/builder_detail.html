@@ -1,0 +1,111 @@
+{% extends "builders/base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% load avatar_tags %}
+{% load builders %}
+
+
+{% block builders_content %}
+<div class="row">
+    <div class="columns small-12 medium-4 medium-push-8">
+        <div class="panel builder-status-panel">
+            <h5>Status{% if editable %} <span class="sub"><a href="{% url 'builder.edit' builder.slug %}">edit</a></span>{% endif %}</h5>
+            <hr>
+            <div class="builder-status builder-status-{{ builder.status }}">
+                {{ builder.get_status_display }}
+            </div>
+        </div>
+        <div class="panel">
+            <h5>Rating</h5>
+            <hr>
+            <table class="review-ratings">
+                <tbody>
+                    <tr>
+                        <th>Overall</th>
+                        <td>{{ builder.overall|stars }}</td>
+                    </tr>
+                    <tr>
+                        <th>Construction</th>
+                        <td>{{ builder.construction|stars }}</td>
+                    </tr>
+                    <tr>
+                        <th>Communication</th>
+                        <td>{{ builder.communication|stars }}</td>
+                    </tr>
+                    <tr>
+                        <th>Timeliness</th>
+                        <td>{{ builder.timeliness|stars }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel">
+            <h5>Members{% if editable %} <span class="sub"><a href="{% url 'builder.edit' builder.slug %}">edit</a></span>{% endif %}</h5>
+            <hr>
+            <ul class="builder-user-list">
+                {% for user in builder.users.all %}
+                <li class="builder-user-entry">
+                    <a href="{{ user.get_absolute_url }}" class="user-link">
+                        {% avatar user 25 %}
+                        {{ user.username }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% if builder.other_sites.all|length %}
+        <div class="panel">
+            <h5>Websites{% if editable %} <span class="sub"><a href="{% url 'builder.edit' builder.slug %}">edit</a></span>{% endif %}</h5>
+            <hr>
+            <ul class="builder-site-list">
+                {% for site in builder.other_sites.all %}
+                <li class="builder-site-entry">
+                    <a rel="nofollow" href="{{ site.url }}">
+                        <img class="favicon" alt="favicon" src="//g.etfv.co/{{ site.url|urlencode }}">
+                        {{ site.human_url }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% elif editable %}
+        <div class="panel callout">
+            Click <a href="{% url 'builder.edit' builder.slug %}">here</a> to add links to your other web sites.
+        </div>
+        {% endif %}
+    </div>
+    <div class="columns small-12 medium-8 medium-pull-4">
+        {% if builder.description.rendered|length %}
+        <div class="panel">
+            <h5>About{% if editable %} <span class="sub"><a href="{% url 'builder.edit' builder.slug %}">edit</a></span>{% endif %}</h5>
+            <hr>
+            <div class="markdown">
+                {{ builder.description.rendered|safe }}
+            </div>
+        </div>
+        {% elif editable %}
+        <div class="panel callout">
+            Click <a href="{% url 'builder.edit' builder.slug %}">here</a> to add a description to your page.
+        </div>
+        {% endif %}
+
+        <div class="panel">
+            <h5>
+                Recent Reviews
+                <span class="sub">
+                    <a href="{% url 'review.list' builder=builder.slug %}">
+                        see all
+                    </a>
+                </span>
+            </h5>
+            {% for review in builder.reviews.all|slice:':5' %}
+            <hr>
+            {% include 'builders/review_summary_snippet.html' %}
+            {% empty %}
+            <hr>
+            There aren't any reviews yet. Why not <a href="#">write one</a>?
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock builders_content %}

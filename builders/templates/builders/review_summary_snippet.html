@@ -1,0 +1,67 @@
+{% load humanize %}
+{% load builders %}
+<article class="review">
+<div class="row">
+    <div class="columns small-12">
+	<header>
+	    <h3 class="review-costume-name">
+		{{ review.costume_name }}
+	    </h3>
+	    <div class="review-costume-info">
+            by
+            <span class="author">
+                <a href="{{ review.user.get_absolute_url }}" class="user-link">
+                {{ review.user.username }}
+                </a>
+            </span>
+            <span class="date">
+                <time datetime="{{ review.created|date:'Y-m-d' }}T{{ review.created|date:'H:i:sO' }}">{{ review.created|naturaltime }}</time>
+                {% if review.edited != review.created %}
+                <span class="edited">
+                (edited
+                <time datetime="{{ review.edited|date:'Y-m-d' }}T{{ review.edited|date:'H:i:sO' }}">{{ review.edited|naturaltime }}</time>)
+                </span>
+                {% endif %}
+            </span>
+	    </div>
+	</header>
+    </div>
+</div>
+<div class="row">
+    <div class="columns small-12 medium-3 medium-push-9 review-gallery">
+        <ul class="small-block-grid-3 medium-block-grid-1">
+            {% for photo in review.photos.all|slice:':3' %}
+            <li><a href="{{ photo.image.url }}"><img src="{{ photo.image.thumb.url }}" alt="{{ photo.caption }}"></a></li>
+            {% empty %}
+            <li>oaeu</li>
+            {% endfor %}
+        </ul>
+    </div><!-- /.review-gallery -->
+    <div class="columns small-12 medium-9 medium-pull-3">
+	<table class="review-ratings">
+	    <tbody>
+		<tr>
+		    <th>Overall</th>
+		    <td>{{ review.rating.overall|stars }}</td>
+		</tr>
+		<tr>
+		    <th>Construction</th>
+		    <td>{{ review.rating.construction|stars }}</td>
+		</tr>
+		<tr>
+		    <th>Communication</th>
+		    <td>{{ review.rating.communication|stars }}</td>
+		</tr>
+		<tr>
+		    <th>Timeliness</th>
+		    <td>{{ review.rating.timeliness|stars }}</td>
+		</tr>
+	    </tbody>
+	</table>
+    </div><!-- /.review-ratings -->
+    <div class="columns small-12 medium-9 medium-pull-3 markdown">
+	{{ review.text.rendered|safe|truncatechars_html:500 }}
+	<a href="{{ review.get_absolute_url}}">(read more)</a>
+    </div>
+</div>
+</article>

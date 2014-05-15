@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'builders/css/main.css' %}" />
+{% endblock css %}
+
+{% block js %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'builders/vendor/raty/jquery.raty.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'builders/js/main.js' %}"></script>
+{% endblock js %}
+
+
+{% block content %}
+{% block builders_header %}
+<div class="row builder-header-row">
+    <div class="columns small-12 builder-header">
+        <h1 class="builder-header-text">
+            {% block builder_name %}
+            <a href="{{ builder.get_absolute_url }}">
+                {{ builder.name }}
+            </a>
+            {% endblock builder_name %}
+        </h1>
+        <img src="{{ builder.banner.large.url }}" alt="{{ builder.name }} Header" />
+    </div><!-- /.builder-header -->
+</div>
+{% endblock builders_header %}
+
+{% block builders_content %}
+{% endblock builders_content %}
+{% endblock %}

@@ -1,0 +1,163 @@
+/*
+ * Global Styles
+ */
+h1 > .sub,
+h2 > .sub,
+h3 > .sub,
+h4 > .sub,
+h5 > .sub,
+h6 > .sub {
+    font-size: 0.8rem;
+    opacity: 0.5;
+}
+
+.autocomplete-light-widget input {
+    width:100% !important;
+}
+
+.autocomplete-light-widget {
+    width:100%;
+}
+
+
+/*
+ * Builder Styles
+ */
+.builder-entry-text,
+.builder-header-text {
+    position: absolute;
+    color: #FFF;
+    font-weight: bold;
+    font-variant: small-caps;
+    letter-spacing: 0.04rem;
+
+    bottom: 1.2rem;
+    left: 1rem;
+    right: 1rem;
+}
+
+.builder-status-panel .builder-status {
+    text-align:center;
+    font-size:1.6875rem;
+}
+
+.builder-status-unknown {
+    color: gold;
+}
+
+.builder-status-closed {
+    color: red;
+}
+
+.builder-status-quotes {
+    color: green;
+}
+
+.builder-status-open {
+    color: green;
+}
+
+.builder-entry-text {
+    text-shadow: 1px 0 1px #000, 0 -1px 1px #000, 0 1px 1px #000, -1px 0 1px #000;
+}
+
+.builder-header-text {
+    text-shadow: 0px 0 5px #000;
+    line-height: 1em;
+    margin:0;
+    padding:0;
+
+    bottom: 0px;
+}
+
+.builder-header-text a {
+    color: #FFF;
+}
+
+.builder-header-row {
+    margin-bottom: 1rem;
+}
+
+.builder-entry,
+.builder-header {
+    position: relative;
+}
+
+.builder-user-list,
+.builder-site-list {
+    list-style: none;
+    margin: 0;
+}
+
+.builder-site-entry {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width:100%;
+    overflow: hidden;
+}
+
+/*
+ * Review Styles
+ */
+
+h3.review-costume-name {
+    margin-bottom:0;
+}
+
+.review-costume-info {
+    font-size: 0.8rem;
+    opacity:0.5;
+    vertical-align:middle;
+    margin-bottom: 0.625rem;
+}
+
+.review-ratings {
+    width:100%;
+}
+
+.review-ratings > tbody > tr > th {
+    text-align: right;
+    width: 50%;
+}
+
+.review-ratings > tbody > tr > td {
+    text-align: center;
+    width: 50%;
+}
+
+.favicon {
+    width: 16px;
+    height: 16px;
+}
+
+/*
+ * Markdown Styles
+ */
+.markuptextarea {
+    height: 25rem;
+}
+.markdown p {
+    text-align: justify;
+}
+
+.markdown h1 {
+    font-size: 1.6875rem;
+}
+
+.markdown h2,
+.markdown h3 {
+    font-size:1.125rem;
+}
+
+.markdown h2 {
+    font-style: italic;
+}
+
+.markdown h4, .markdown h5, .markdown h6 {
+    font-size: 1rem;
+    font-style: italic;
+}
+
+.markdown h5, .markdown h6 {
+    font-style: normal;
+}

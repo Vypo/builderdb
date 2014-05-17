@@ -1,0 +1,22 @@
+{% load builders %}
+
+<table class="review-ratings">
+    <tbody>
+        <tr>
+            <th>Overall</th>
+            <td>{{ review.overall|stars }}</td>
+        </tr>
+        <tr>
+            <th>Construction</th>
+            <td>{{ review.construction|stars }}</td>
+        </tr>
+        <tr>
+            <th>Communication</th>
+            <td>{{ review.communication|stars }}</td>
+        </tr>
+        <tr>
+            <th>Timeliness</th>
+            <td>{{ review.timeliness|stars }}</td>
+        </tr>
+    </tbody>
+</table>

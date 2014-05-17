@@ -1,0 +1,26 @@
+{% extends "builders/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block builder_name %}
+{{ block.super}} &mdash; <a href="{{review.get_absolute_url}}">{{ review.costume_name }}</a>
+{% endblock builder_name %}
+
+{% block builders_content %}
+{{ block.super }}
+
+<div class="row">
+    <div class="columns small-12">
+        <div class="panel">
+            <form method="POST">
+                {% crispy form %}
+                {% crispy formset %}
+                <div class="button-holder">
+                    <input type="submit" name="submit" value="Save" class="submit button" id="submit-id-submit" />
+                    <a class="button secondary" href="{% url 'review.detail' review.builder.slug review.slug %}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock builders_content %}

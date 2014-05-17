@@ -105,7 +105,7 @@ class DeleteForm(forms.ModelForm):
                 Row(
                     Column(ButtonHolder(
                         Submit('submit', 'Delete', css_class='alert'),
-                        HTML('<a class="button" href="' + self.get_cancel_url() + '">Go Back</a>')
+                        HTML('<a class="button secondary" href="' + self.get_cancel_url() + '">Go Back</a>')
                     ), css_class='small-12')
                 )
             )

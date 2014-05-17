@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import (GenericForeignKey,
+                                                GenericRelation)
 from easy_thumbnails.fields import ThumbnailerImageField
 from django.core.urlresolvers import reverse
 from autoslug import AutoSlugField
@@ -7,20 +10,6 @@ from urlparse import urlsplit, urlunsplit
 from markupfield.fields import MarkupField
 from math import ceil
 from decimal import Decimal, ROUND_CEILING
-
-class Rating(models.Model):
-    construction = models.DecimalField(max_digits=2, decimal_places=1)
-    communication = models.DecimalField(max_digits=2, decimal_places=1)
-    timeliness = models.DecimalField(max_digits=2, decimal_places=1)
-
-    @property
-    def overall(self):
-        avg = self.construction
-        avg += self.communication
-        avg += self.timeliness
-        avg /= Decimal('3.0')
-        return avg
-
 
 class Photo(models.Model):
     class Meta:
@@ -30,6 +19,10 @@ class Photo(models.Model):
     priority = models.IntegerField(blank=True, default=0)
     created = models.DateTimeField(auto_now_add=True)
     edited = models.DateTimeField(auto_now=True)
+
+    content_type = models.ForeignKey(ContentType, related_name='+')
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
 
     def __unicode__(self):
         return self.caption[:25] + ('...' if len(self.caption) > 25 else '')
@@ -42,9 +35,9 @@ class BuilderManager(models.Manager):
         #       Blocked on https://code.djangoproject.com/ticket/14030
 
         return qs.annotate(
-            construction=models.Avg('reviews__rating__construction'),
-            communication=models.Avg('reviews__rating__communication'),
-            timeliness=models.Avg('reviews__rating__timeliness')
+            construction=models.Avg('reviews__construction'),
+            communication=models.Avg('reviews__communication'),
+            timeliness=models.Avg('reviews__timeliness')
         )
 
 class Builder(models.Model):
@@ -131,9 +124,19 @@ class Review(models.Model):
     commission_date = models.DateField()
     received_date = models.DateField(blank=True, null=True)
 
-    photos = models.ManyToManyField(Photo, blank=True)
+    photos = GenericRelation(Photo, related_query_name='reviews')
 
-    rating = models.OneToOneField(Rating)
+    construction = models.DecimalField(max_digits=2, decimal_places=1)
+    communication = models.DecimalField(max_digits=2, decimal_places=1)
+    timeliness = models.DecimalField(max_digits=2, decimal_places=1)
+
+    @property
+    def overall(self):
+        avg = self.construction
+        avg += self.communication
+        avg += self.timeliness
+        avg /= Decimal('3.0')
+        return avg
 
     def __unicode__(self):
         return unicode(self.builder) + ' (' + self.costume_name + ')'
@@ -141,3 +144,6 @@ class Review(models.Model):
     def get_absolute_url(self):
         return reverse('review.detail', args=[str(self.builder.slug),
                                                 str(self.slug)])
+
+    def can_edit(self, user):
+        return user.pk == self.user.pk

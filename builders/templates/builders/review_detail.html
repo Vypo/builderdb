@@ -48,26 +48,9 @@
         <div class="panel">
             <h5>Rating</h5>
             <hr>
-            <table class="review-ratings">
-                <tbody>
-                    <tr>
-                        <th>Overall</th>
-                        <td>{{ review.rating.overall|stars }}</td>
-                    </tr>
-                    <tr>
-                        <th>Construction</th>
-                        <td>{{ review.rating.construction|stars }}</td>
-                    </tr>
-                    <tr>
-                        <th>Communication</th>
-                        <td>{{ review.rating.communication|stars }}</td>
-                    </tr>
-                    <tr>
-                        <th>Timeliness</th>
-                        <td>{{ review.rating.timeliness|stars }}</td>
-                    </tr>
-                </tbody>
-            </table>
+            {% with rating=review %}
+            {% include 'builders/rating_snippet.html' %}
+            {% endwith %}
         </div>
         <div class="panel">
             <h5>Photos</h5>

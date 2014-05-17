@@ -38,26 +38,9 @@
         </ul>
     </div><!-- /.review-gallery -->
     <div class="columns small-12 medium-9 medium-pull-3">
-	<table class="review-ratings">
-	    <tbody>
-		<tr>
-		    <th>Overall</th>
-		    <td>{{ review.rating.overall|stars }}</td>
-		</tr>
-		<tr>
-		    <th>Construction</th>
-		    <td>{{ review.rating.construction|stars }}</td>
-		</tr>
-		<tr>
-		    <th>Communication</th>
-		    <td>{{ review.rating.communication|stars }}</td>
-		</tr>
-		<tr>
-		    <th>Timeliness</th>
-		    <td>{{ review.rating.timeliness|stars }}</td>
-		</tr>
-	    </tbody>
-	</table>
+        {% with rating=review %}
+        {% include 'builders/rating_snippet.html' %}
+        {% endwith %}
     </div><!-- /.review-ratings -->
     <div class="columns small-12 medium-9 medium-pull-3 markdown">
 	{{ review.text.rendered|safe|truncatechars_html:500 }}

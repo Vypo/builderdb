@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Builder, Website, Review, Photo, Rating
+from .models import Builder, Website, Review, Photo
 
 class BuilderAdmin(admin.ModelAdmin):
     pass
@@ -20,9 +20,3 @@ class PhotoAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Photo, PhotoAdmin)
-
-class RatingAdmin(admin.ModelAdmin):
-    pass
-
-admin.site.register(Rating, RatingAdmin)
-

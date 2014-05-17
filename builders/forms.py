@@ -1,11 +1,26 @@
 from django import forms
+from django.contrib.contenttypes.forms import generic_inlineformset_factory
 from django.forms.models import modelform_factory, modelformset_factory, inlineformset_factory
+from django.forms.widgets import Widget
 from django.core.validators import ValidationError, URLValidator
-from .models import Builder, Website
+from .models import Builder, Website, Review, Photo
 from crispy_forms.helper import FormHelper
+from crispy_forms.layout import LayoutObject
+from crispy_forms.utils import render_field
 from crispy_forms_foundation.layout import (Layout, Submit, Fieldset, Row,
-                                            Column, ButtonHolder, HTML)
+                                            Column, ButtonHolder, HTML, Div)
 import autocomplete_light
+
+class RatyWidget(Widget):
+    def render(self, name, value, attrs=None):
+        try:
+            value = float(value)
+        except ValueError:
+            value = 0
+        return '''
+<div data-raty data-raty-rw data-raty-score="{0}" data-raty-for="{1}"></div>
+<input type="hidden" id="{1}" name="{2}" value="{0}">
+'''.format(value, attrs['id'], name)
 
 class BuilderForm(autocomplete_light.ModelForm):
     class Meta:
@@ -92,3 +107,68 @@ class DeleteForm(forms.ModelForm):
                 )
             )
         )
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        exclude = ['user', 'builder']
+        widgets = {
+            'construction': RatyWidget,
+            'communication': RatyWidget,
+            'timeliness': RatyWidget,
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(ReviewForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            Fieldset('Basic Information',
+                Row(
+                    Column('costume_name', css_class='small-12')
+                ),
+                Row(
+                    Column('commission_date', css_class='small-12 medium-6'),
+                    Column('received_date', css_class='small-12 medium-6')
+                ),
+            ),
+
+            Fieldset('Details',
+                Row(
+                    Column('text', css_class='small-12')
+                )
+            ),
+
+            Fieldset('Rating',
+                Div('construction',
+                    'communication',
+                    'timeliness')
+            )
+        )
+
+class PhotoFormHelper(FormHelper):
+    form_tag = False
+    layout = Layout(
+        Fieldset('Photo',
+            Row(
+                Column('image', css_class='small-12 medium-6'),
+                Column('DELETE', css_class='small-12 medium-6')
+            ),
+            Row(
+                Column('caption', css_class='small-12 medium-9'),
+                Column('priority', css_class='small-12 medium-3'),
+            )
+        )
+    )
+
+class PhotoForm(forms.ModelForm):
+    class Meta:
+        model = Photo
+        exclude = []
+
+    def __init__(self, *args, **kwargs):
+        super(PhotoForm, self).__init__(*args, **kwargs)
+        self.helper = PhotoFormHelper()
+
+PhotoInlineFormSet = generic_inlineformset_factory(Photo, form=PhotoForm, extra=1)
+PhotoInlineFormSet.helper = PhotoFormHelper()

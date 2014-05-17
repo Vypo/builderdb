@@ -37,10 +37,10 @@ MARKUP_FIELD_TYPES = (
 # Application definition
 
 INSTALLED_APPS = (
+    'django.contrib.contenttypes',
     'autocomplete_light',
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',

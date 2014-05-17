@@ -101,9 +101,15 @@
             {% for review in builder.reviews.all|slice:':5' %}
             <hr>
             {% include 'builders/review_summary_snippet.html' %}
+            {% if forloop.last and request.user.is_authenticated %}
+        </div>
+        <div class="panel callout reviews-panel-add">
+            <a href="{% url 'review.create' builder.slug %}">Add Your Review</a>
+        </div>
+            {% endif %}
             {% empty %}
             <hr>
-            There aren't any reviews yet. Why not <a href="#">write one</a>?
+            There aren't any reviews yet. Why not <a href="{% url 'review.create' builder.slug %}">write one</a>?
             {% endfor %}
         </div>
     </div>

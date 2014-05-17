@@ -31,10 +31,17 @@
     <div class="columns small-12 medium-3 medium-push-9 review-gallery">
         <ul class="small-block-grid-3 medium-block-grid-1">
             {% for photo in review.photos.all|slice:':3' %}
-            <li><a href="{{ photo.image.url }}"><img src="{{ photo.image.thumb.url }}" alt="{{ photo.caption }}"></a></li>
+            <li><a href="{% url 'photo.detail' builder.slug review.slug photo.pk %}"><img src="{{ photo.image.thumb.url }}" alt="{{ photo.caption }}"></a></li>
             {% empty %}
-            <li>oaeu</li>
+            <li>No Photos</li>
             {% endfor %}
+            {% if request.user == review.user %}
+            <li>
+                <a href="{% url 'photo.create' builder.slug review.slug %}">
+                    <div class="panel callout">Add Photo</div>
+                </a>
+            </li>
+            {% endif %}
         </ul>
     </div><!-- /.review-gallery -->
     <div class="columns small-12 medium-9 medium-pull-3">

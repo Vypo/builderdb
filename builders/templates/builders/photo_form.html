@@ -2,10 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block builder_name %}
-{{ block.super}}
-{% if review.costume_name %}
-&mdash; <a href="{{review.get_absolute_url}}">{{ review.costume_name }}</a>
-{% endif %}
+{{ block.super}} &mdash; <a href="{{review.get_absolute_url}}">{{ review.costume_name }}</a>
 {% endblock builder_name %}
 
 {% block builders_content %}

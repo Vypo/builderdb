@@ -1,0 +1,43 @@
+{% extends "builders/base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% load avatar_tags %}
+{% load builders %}
+{% load humanize %}
+
+{% block builder_name %}
+{{ block.super}} &mdash; <a href="{{review.get_absolute_url}}">{{ review.costume_name }}</a>
+{% endblock builder_name %}
+
+{% block builders_content %}
+{{ block.super }}
+<div class="row">
+    <div class="columns small-12">
+        <div class="panel">
+            <h5>Photo</h5>
+            <hr>
+            <div class="review-gallery">
+                <ul class="small-block-grid-1 medium-block-grid-1">
+                    <li>
+                        <img src="{{ photo.image.url }}" alt="{{ photo.caption }}">
+                        <div class="caption">
+                            {{ photo.caption }}
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- /.review-gallery -->
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="columns small-2 end">
+        {% if request.user == review.user %}
+            <a href="{% url 'photo.delete' builder.slug review.slug photo.pk %}">
+                <div class="panel callout">Delete</div>
+            </a>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock builders_content %}

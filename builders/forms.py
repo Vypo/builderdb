@@ -15,7 +15,7 @@ class RatyWidget(Widget):
     def render(self, name, value, attrs=None):
         try:
             value = float(value)
-        except ValueError:
+        except:
             value = 0
         return '''
 <div data-raty data-raty-rw data-raty-score="{0}" data-raty-for="{1}"></div>
@@ -93,6 +93,9 @@ class DeleteForm(forms.ModelForm):
     def create_for(cls, obj):
         return modelform_factory(type(obj), form=cls)(instance=obj)
 
+    def get_cancel_url(self):
+        return self.instance.get_absolute_url()
+
     def __init__(self, *args, **kwargs):
         super(DeleteForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -102,11 +105,19 @@ class DeleteForm(forms.ModelForm):
                 Row(
                     Column(ButtonHolder(
                         Submit('submit', 'Delete', css_class='alert'),
-                        HTML('<a class="button" href="' + self.instance.get_absolute_url() + '">Go Back</a>')
+                        HTML('<a class="button" href="' + self.get_cancel_url() + '">Go Back</a>')
                     ), css_class='small-12')
                 )
             )
         )
+
+class PhotoDeleteForm(DeleteForm):
+    class Meta(DeleteForm.Meta):
+        model = Photo
+
+    def get_cancel_url(self):
+        print 'oaeuaoeu', repr(self.instance.pk)
+        return self.instance.content_object.get_absolute_url()
 
 class ReviewForm(forms.ModelForm):
     class Meta:
@@ -120,8 +131,10 @@ class ReviewForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ReviewForm, self).__init__(*args, **kwargs)
+        if 'builder' in kwargs['initial']:
+            builder = kwargs['initial']['builder']
+            self.instance.builder = builder
         self.helper = FormHelper()
-        self.helper.form_tag = False
         self.helper.layout = Layout(
             Fieldset('Basic Information',
                 Row(
@@ -143,32 +156,39 @@ class ReviewForm(forms.ModelForm):
                 Div('construction',
                     'communication',
                     'timeliness')
-            )
-        )
-
-class PhotoFormHelper(FormHelper):
-    form_tag = False
-    layout = Layout(
-        Fieldset('Photo',
-            Row(
-                Column('image', css_class='small-12 medium-6'),
-                Column('DELETE', css_class='small-12 medium-6')
             ),
-            Row(
-                Column('caption', css_class='small-12 medium-9'),
-                Column('priority', css_class='small-12 medium-3'),
+
+            ButtonHolder(
+                Submit('submit', 'Save'),
+                HTML('<a class="button secondary" href="'
+                        + (self.instance.get_absolute_url() if self.instance.pk is not None else builder.get_absolute_url()) + '">Cancel</a>')
             )
         )
-    )
 
 class PhotoForm(forms.ModelForm):
     class Meta:
         model = Photo
-        exclude = []
+        exclude = ['content_object', 'object_id', 'content_type']
 
     def __init__(self, *args, **kwargs):
         super(PhotoForm, self).__init__(*args, **kwargs)
-        self.helper = PhotoFormHelper()
-
-PhotoInlineFormSet = generic_inlineformset_factory(Photo, form=PhotoForm, extra=1)
-PhotoInlineFormSet.helper = PhotoFormHelper()
+        if 'content_object' in kwargs['initial']:
+            context_object = kwargs['initial']['content_object']
+            self.instance.content_object = context_object
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset('Photo',
+                Row(
+                    Column('image', css_class='small-12'),
+                ),
+                Row(
+                    Column('caption', css_class='small-12 medium-9'),
+                    Column('priority', css_class='small-12 medium-3'),
+                )
+            ),
+            ButtonHolder(
+                Submit('submit', 'Save'),
+                HTML('<a class="button secondary" href="'
+                        + self.instance.content_object.get_absolute_url() + '">Cancel</a>')
+            )
+        )

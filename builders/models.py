@@ -142,8 +142,11 @@ class Review(models.Model):
         return unicode(self.builder) + ' (' + self.costume_name + ')'
 
     def get_absolute_url(self):
-        return reverse('review.detail', args=[str(self.builder.slug),
-                                                str(self.slug)])
+        try:
+            return reverse('review.detail', args=[str(self.builder.slug),
+                                                    str(self.slug)])
+        except Builder.DoesNotExist:
+            return None
 
     def can_edit(self, user):
         return user.pk == self.user.pk

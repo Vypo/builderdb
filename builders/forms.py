@@ -101,11 +101,12 @@ class DeleteForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Fieldset(
-                'Are you sure you want to delete "' + unicode(self.instance) + '"?',
+                'Are you sure you want to delete "{0}"?'.format(self.instance),
                 Row(
                     Column(ButtonHolder(
                         Submit('submit', 'Delete', css_class='alert'),
-                        HTML('<a class="button secondary" href="' + self.get_cancel_url() + '">Go Back</a>')
+                        HTML('<a class="button secondary" href="'
+                                + self.get_cancel_url() + '">Go Back</a>')
                     ), css_class='small-12')
                 )
             )

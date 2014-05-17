@@ -67,11 +67,6 @@
                     <li>No photos</li>
                     {% endfor %}
                 </ul>
-                {% if request.user == review.user %}
-                    <a href="{% url 'photo.create' builder.slug review.slug %}">
-                        <div class="panel callout">Add Photo</div>
-                    </a>
-                {% endif %}
             </div><!-- /.review-gallery -->
         </div>
     </div>

@@ -12,11 +12,27 @@
 {{ block.super }}
 
 <div class="row">
-    <div class="columns small-12">
+    <div class="columns small-12 medium-9">
         <div class="panel">
             {% crispy form %}
         </div>
     </div>
+    <div class="columns small-12 medium-3 review-gallery">
+        <div class="panel">
+            <ul class="small-block-grid-3 medium-block-grid-1">
+                {% for photo in review.photos.all|slice:':3' %}
+                <li><a href="{% url 'photo.detail' builder.slug review.slug photo.pk %}"><img src="{{ photo.image.thumb.url }}" alt="{{ photo.caption }}"></a></li>
+                {% empty %}
+                <li>No Photos</li>
+                {% endfor %}
+                <li>
+                    <a href="{% url 'photo.create' builder.slug review.slug %}">
+                        <div class="panel callout">Add Photo</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div><!-- /.review-gallery -->
 </div>
 
 {% endblock builders_content %}

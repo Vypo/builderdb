@@ -132,9 +132,9 @@ class Review(models.Model):
 
     @property
     def overall(self):
-        avg = self.construction
-        avg += self.communication
-        avg += self.timeliness
+        avg = Decimal(self.construction)
+        avg += Decimal(self.communication)
+        avg += Decimal(self.timeliness)
         avg /= Decimal('3.0')
         return avg
 

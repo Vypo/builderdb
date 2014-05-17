@@ -26,9 +26,11 @@
                 <li>No Photos</li>
                 {% endfor %}
                 <li>
+                    {% if review.slug %}
                     <a href="{% url 'photo.create' builder.slug review.slug %}">
                         <div class="panel callout">Add Photo</div>
                     </a>
+                    {% endif %}
                 </li>
             </ul>
         </div>

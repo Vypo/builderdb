@@ -17,7 +17,7 @@
             <article>
                 <header>
                     <h3 class="review-costume-name">
-                        {{ review.costume_name }}
+                        {{ review.costume_name }}{% if review.user == request.user %} <span class="sub"><a href="{% url 'review.edit' review.builder.slug review.slug %}">edit</a></span>{% endif %}
                     </h3>
                     <div class="review-costume-info">
                         by

@@ -158,6 +158,7 @@ class PhotoDeleteView(DeleteView):
     def get_context_data(self, *args, **kwargs):
         ctx = super(PhotoDeleteView, self).get_context_data(*args, **kwargs)
         ctx['builder'] = self.builder
+        ctx['review'] = self.object.content_object
         ctx['form'] = PhotoDeleteForm(instance=self.object)
         return ctx
 

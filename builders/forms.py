@@ -18,8 +18,7 @@ class RatyWidget(Widget):
         except:
             value = 0
         return '''
-<div data-raty data-raty-rw data-raty-score="{0}" data-raty-for="{1}"></div>
-<input type="hidden" id="{1}" name="{2}" value="{0}">
+<div data-raty data-raty-rw data-raty-score="{0}" data-raty-name="{2}"></div>
 '''.format(value, attrs['id'], name)
 
 class BuilderForm(autocomplete_light.ModelForm):

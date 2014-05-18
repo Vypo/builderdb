@@ -10,12 +10,8 @@ $(function () {
         readOnly: function() {
             return !$(this).is('[data-raty-rw]');
         },
-        click: function(score, e) {
-            var dest = $(this).attr('data-raty-for');
-            if (dest) {
-                dest = $('#' + dest);
-                dest.val(score);
-            }
+        scoreName: function() {
+            return $(this).attr('data-raty-name');
         },
     });
 });

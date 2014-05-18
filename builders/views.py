@@ -3,7 +3,7 @@ from django.views.generic import (ListView, DetailView, UpdateView, DeleteView,
                                     CreateView)
 from django.shortcuts import get_object_or_404
 from .models import Builder, Review, Photo
-from .forms import BuilderForm, DeleteForm, ReviewForm, PhotoForm, PhotoDeleteForm
+from .forms import BuilderForm, DeleteForm, ReviewForm, PhotoForm
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
@@ -159,7 +159,7 @@ class PhotoDeleteView(DeleteView):
         ctx = super(PhotoDeleteView, self).get_context_data(*args, **kwargs)
         ctx['builder'] = self.builder
         ctx['review'] = self.object.content_object
-        ctx['form'] = PhotoDeleteForm(instance=self.object)
+        ctx['form'] = DeleteForm.create_for(self.object)
         return ctx
 
     @method_decorator(login_required)

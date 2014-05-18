@@ -112,14 +112,6 @@ class DeleteForm(forms.ModelForm):
             )
         )
 
-class PhotoDeleteForm(DeleteForm):
-    class Meta(DeleteForm.Meta):
-        model = Photo
-
-    def get_cancel_url(self):
-        print 'oaeuaoeu', repr(self.instance.pk)
-        return self.instance.content_object.get_absolute_url()
-
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review

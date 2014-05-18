@@ -27,6 +27,14 @@ class Photo(models.Model):
     def __unicode__(self):
         return self.caption[:25] + ('...' if len(self.caption) > 25 else '')
 
+    def get_absolute_url(self):
+        try:
+            return reverse('photo.detail', args=[str(self.content_object.builder.slug),
+                                                    str(self.content_object.slug),
+                                                    str(self.pk)])
+        except Builder.DoesNotExist:
+            return None
+
 class BuilderManager(models.Manager):
     def get_queryset(self):
         qs = super(BuilderManager, self).get_queryset()

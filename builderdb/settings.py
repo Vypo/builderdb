@@ -61,9 +61,6 @@ INSTALLED_APPS = (
     'accounts',
 )
 
-if DEBUG:
-    INSTALLED_APPS = tuple(list(INSTALLED_APPS)+['debug_toolbar'])
-
 # Template Context Processors
 # https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
 
@@ -178,3 +175,6 @@ try:
     from .local_settings import *
 except ImportError:
     pass
+
+if DEBUG:
+    INSTALLED_APPS = tuple(list(INSTALLED_APPS)+['debug_toolbar'])

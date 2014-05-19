@@ -9,3 +9,6 @@
 db.sqlite3
 venv/
 media/
+
+# Local Settings
+builderdb/local_settings.py

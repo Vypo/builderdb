@@ -173,3 +173,8 @@ THUMBNAIL_ALIASES = {
         'thumb_portait': {'size': (150, 300), 'crop': 'smart', 'upscale': True},
     }
 }
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass

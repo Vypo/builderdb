@@ -66,7 +66,7 @@ class Builder(models.Model):
 
     objects = BuilderManager()
 
-    name = models.CharField(max_length=1024, unique=True)
+    name = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(populate_from='name', unique=True)
     status = models.CharField(max_length=16, choices=STATUS_CHOICES)
     users = models.ManyToManyField(User, related_name='builders',

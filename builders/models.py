@@ -90,9 +90,6 @@ class Builder(models.Model):
         return self.users.filter(pk=user.pk).exists()
 
 class Website(models.Model):
-    class Meta:
-        unique_together = (('url', 'builder'),)
-
     url = models.URLField(max_length=2048)
     builder = models.ForeignKey(Builder, related_name='other_sites')
 

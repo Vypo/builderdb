@@ -71,7 +71,7 @@ class Builder(models.Model):
     status = models.CharField(max_length=16, choices=STATUS_CHOICES)
     users = models.ManyToManyField(User, related_name='builders',
                                     verbose_name='members')
-    banner = ThumbnailerImageField(upload_to='banners')
+    banner = ThumbnailerImageField(upload_to='headers')
     thumb = ThumbnailerImageField(upload_to='thumbs', verbose_name='thumbnail')
     description = MarkupField(blank=True,  markup_type='markdown',
                                 escape_html=True)

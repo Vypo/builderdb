@@ -172,7 +172,8 @@ THUMBNAIL_ALIASES = {
 }
 
 try:
-    from .local_settings import *
+    from .local_settings import local_settings
+    local_settings(globals())
 except ImportError:
     pass
 

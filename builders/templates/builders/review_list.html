@@ -12,7 +12,7 @@
             {% include 'builders/review_summary_snippet.html' %}
             {% empty %}
             <hr>
-            There aren't any reviews yet. Why not <a href="#">write one</a>?
+            There aren't any reviews yet. Why not <a href="{% url 'review.create' builder.slug %}">write one</a>?
             {% endfor %}
         </div>
     </div>

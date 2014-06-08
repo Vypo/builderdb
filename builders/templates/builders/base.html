@@ -2,6 +2,10 @@
 {% load staticfiles %}
 {% load sitetree %}
 
+{% block title %}
+{% sitetree_page_title from 'builders' %} | {{ block.super }}
+{% endblock title %}
+
 {% block css %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'builders/css/main.css' %}" />

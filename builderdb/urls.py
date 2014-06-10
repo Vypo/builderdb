@@ -2,6 +2,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.flatpages import views
 
 urlpatterns = [
     # Examples:
@@ -10,6 +11,7 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^autocomplete/', include('autocomplete_light.urls')),
+    url(r'^pages/privacy/$', views.flatpage, {'url': '/pages/privacy/'}, name='flat_privacy'),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^accounts/avatar/', include('avatar.urls')),

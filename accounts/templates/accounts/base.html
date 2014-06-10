@@ -1,8 +1,18 @@
-{% extends "base.html" %}
+{% extends "accounts/superbase.html" %}
+{% load sitetree %}
 
-{% block base_body %}
-<!-- TODO: Navigation -->
 {% block content %}
+{% sitetree_breadcrumbs from 'accounts' %}
+{{ block.super }}
 
-{% endblock content%}
-{% endblock base_body %}
+<div class="row">
+    <div class="columns small-12">
+        <div class="panel">
+        <h5>{% block head_title %}{% endblock head_title %}</h5>
+        <hr>
+{% block accounts_content %}
+{% endblock accounts_content %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

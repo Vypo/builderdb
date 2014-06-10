@@ -17,19 +17,7 @@ Fursuits.By
 {% block base_body %}
 {% sitetree_menu from 'accounts' include 'trunk' %}
 {% block content %}
-{% if messages %}
-<div class="row">
-    <div class="columns small-12">
-        {% for message in messages %}
-        <div data-alert class="alert-box {% if message.tags %}{{ message.tags }}{% endif %}">
-            {{ message }}
-            <a href="#" class="close">&times;</a>
-        </div>
-        {% endfor %}
-    </div>
-</div>
-{% endif %}
+{% include 'message_snippet.html' %}
 
 {% endblock content %}
-
 {% endblock base_body %}

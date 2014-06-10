@@ -1,0 +1,14 @@
+{% extends 'accounts/base.html' %}
+
+{% block head_title %}Account Settings{% endblock head_title %}
+
+{% block accounts_content %}
+<div class="account-settings">
+    <ul>
+        <li><a href="{% url 'account_change_password' %}">Change Password</a></li>
+        <li><a href="{% url 'account_email' %}">Manage E-Mail Addresses</a></li>
+        <li><a href="{% url 'avatar_change' %}">Choose Avatar</a></li>
+        <li><a href="{% url 'avatar_delete' %}">Delete Avatars</a></li>
+    </ul>
+</div><!-- /.account-settings -->
+{% endblock accounts_content %}

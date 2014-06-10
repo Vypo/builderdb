@@ -47,10 +47,10 @@
             <ul class="builder-user-list">
                 {% for user in builder.users.all %}
                 <li class="builder-user-entry">
-                    <a href="{{ user.get_absolute_url }}" class="user-link">
+                    <span class="user-link">
                         {% avatar user 25 %}
                         {{ user.username }}
-                    </a>
+                    </span>
                 </li>
                 {% endfor %}
             </ul>

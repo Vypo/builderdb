@@ -22,9 +22,9 @@
                     <div class="review-costume-info">
                         by
                         <span class="author">
-                            <a href="{{ review.user.get_absolute_url }}" class="user-link" rel="author">
+                            <span class="user-link">
                             {{ review.user.username }}
-                            </a>
+                            </span>
                         </span>
                         <span class="date">
                             <time datetime="{{ review.created|date:'Y-m-d' }}T{{ review.created|date:'H:i:sO' }}">{{ review.created|naturaltime }}</time>

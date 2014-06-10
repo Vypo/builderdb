@@ -121,6 +121,8 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+LOGIN_REDIRECT_URL = 'builder.list'
+
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 

@@ -1,3 +1,22 @@
+# Copyright 2014 Vypo
+#
+# message   f=views.py&n=719e9554a5956ad7
+# sha256    9f56580af11239076aa77f7d7d0a43c19dfdc88b0debe0a90b06f861f8201d97
+#
+# This file is part of BuilderDB.
+#
+# BuilderDB is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# BuilderDB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with BuilderDB.  If not, see <http://www.gnu.org/licenses/>.
 from django.shortcuts import render
 from django.views.generic import (ListView, DetailView, UpdateView, DeleteView,
                                     CreateView)

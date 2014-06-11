@@ -1,3 +1,23 @@
+# Copyright 2014 Vypo
+#
+# message   f=admin.py&n=3c4bc6b2d917682d
+# sha256    b8e61ca54f62000b1cdc118d0645c2b9e4e343ba0f5c3255449822e430f73d4e
+#
+# This file is part of BuilderDB.
+#
+# BuilderDB is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# BuilderDB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with BuilderDB.  If not, see <http://www.gnu.org/licenses/>.
+
 from django.contrib import admin
 
 # Register your models here.

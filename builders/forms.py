@@ -1,3 +1,22 @@
+# Copyright 2014 Vypo
+#
+# message   f=forms.py&n=4fdaaa28e47d5f11
+# sha256    e4a61499d3352361f9239e94683f3a7caaa057cbcdca1ecaa10c2c21ac2e6a0f
+#
+# This file is part of BuilderDB.
+#
+# BuilderDB is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# BuilderDB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with BuilderDB.  If not, see <http://www.gnu.org/licenses/>.
 from django import forms
 from django.contrib.contenttypes.forms import generic_inlineformset_factory
 from django.forms.models import modelform_factory, modelformset_factory, inlineformset_factory

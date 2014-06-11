@@ -11,7 +11,7 @@
 {% endblock foundation_js %}
 
 {% block title %}
-Fursuits.By
+{{ site.name }}
 {% endblock title %}
 
 {% block base_body %}
@@ -20,4 +20,8 @@ Fursuits.By
 {% include 'message_snippet.html' %}
 
 {% endblock content %}
+<footer>
+This website is released under the terms of the GNU Affero General Public License.
+The full source is available at: <a href="https://github.com/Vypo/builderdb">https://github.com/Vypo/builderdb</a>.
+</footer>
 {% endblock base_body %}

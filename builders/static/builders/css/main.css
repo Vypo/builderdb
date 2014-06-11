@@ -1,6 +1,12 @@
 /*
  * Global Styles
  */
+footer {
+    text-align:center;
+    font-size:small;
+    color:grey;
+}
+
 h1 > .sub,
 h2 > .sub,
 h3 > .sub,

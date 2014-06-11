@@ -1,3 +1,22 @@
+# Copyright 2014 Vypo
+#
+# message   f=sitetrees.py&n=140ca0881fac3423
+# sha256    489f20b0a830e9b98df2cab606828508be8c8eceba95d015bd8db8501c3bb09b
+#
+# This file is part of BuilderDB.
+#
+# BuilderDB is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# BuilderDB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with BuilderDB.  If not, see <http://www.gnu.org/licenses/>.
 from sitetree.utils import tree, item
 
 sitetrees = (

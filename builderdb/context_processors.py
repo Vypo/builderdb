@@ -1,7 +1,7 @@
 # Copyright 2014 Vypo
 #
-# message   f=builders.py&n=acf190c1cf2abb31
-# sha256    23e448c2f31a41fecbd7d63fb90ace31c0cdca90aeb2c0a876f6393ed8600cff
+# message   f=context_processors.py&n=c5afad38fee015ce
+# sha256    1291b1447080dfdd0c61f7413859851bda3acd8d5b21906306bd457498933ad8
 #
 # This file is part of BuilderDB.
 #
@@ -17,23 +17,9 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with BuilderDB.  If not, see <http://www.gnu.org/licenses/>.
-from django import template
-from django.utils.safestring import mark_safe
+from django.contrib.sites.models import Site
 
-register = template.Library()
-
-def stars(value, name=None):
-    '''Converts a number into raty stars'''
-    try:
-        value = float(value)
-    except ValueError:
-        return value
-    except TypeError:
-        return 0
-
-    if name is None:
-        return mark_safe('''<div data-raty data-raty-score="{0}"></div>'''.format(value))
-    else:
-        return mark_safe('''<div data-raty data-raty-score="{0}" data-raty-editable></div>'''.format(value))
-
-register.filter('stars', stars)
+def site(request):
+    return {
+        'site': Site.objects.get_current()
+    }

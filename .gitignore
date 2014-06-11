@@ -8,7 +8,10 @@
 # Development Files
 db.sqlite3
 venv/
+
+# Static Files
 media/
+static/
 
 # Local Settings
 builderdb/local_settings.py

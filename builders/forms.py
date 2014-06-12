@@ -88,7 +88,8 @@ class BuilderForm(autocomplete_light.ModelForm):
         urls = self.cleaned_data['other_sites'].split('\r\n')
         validator = URLValidator()
         for url in urls:
-            validator(url)
+            if len(url) > 0:
+                validator(url)
         return urls
 
     def save(self, *args, **kwargs):

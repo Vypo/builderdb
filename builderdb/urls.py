@@ -30,12 +30,22 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.flatpages import views
+from django.contrib.sitemaps import FlatPageSitemap
+from builders.sitemap import BuilderSitemap, ReviewSitemap
+
+sitemaps = {
+    'flatpages': FlatPageSitemap,
+    'builders': BuilderSitemap,
+    'reviews': ReviewSitemap,
+}
 
 urlpatterns = [
     # Examples:
     # url(r'^$', 'builderdb.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
+    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
+        {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^pages/privacy/$', views.flatpage, {'url': '/pages/privacy/'}, name='flat_privacy'),

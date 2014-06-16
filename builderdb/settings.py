@@ -74,6 +74,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.flatpages',
+    'django.contrib.sitemaps',
 
     'foundation',
     'crispy_forms',

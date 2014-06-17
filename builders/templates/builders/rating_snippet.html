@@ -2,20 +2,20 @@
 
 <table class="review-ratings">
     <tbody>
-        <tr>
-            <th>Overall</th>
+        <tr itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+            <th itemprop="name">Overall</th>
             <td>{{ review.overall|stars }}</td>
         </tr>
-        <tr>
-            <th>Construction</th>
+        <tr itemscope itemtype="http://schema.org/Rating">
+            <th itemprop="name">Construction</th>
             <td>{{ review.construction|stars }}</td>
         </tr>
-        <tr>
-            <th>Communication</th>
+        <tr itemscope itemtype="http://schema.org/Rating">
+            <th itemprop="name">Communication</th>
             <td>{{ review.communication|stars }}</td>
         </tr>
-        <tr>
-            <th>Timeliness</th>
+        <tr itemscope itemtype="http://schema.org/Rating">
+            <th itemprop="name">Timeliness</th>
             <td>{{ review.timeliness|stars }}</td>
         </tr>
     </tbody>

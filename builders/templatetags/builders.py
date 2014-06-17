@@ -32,7 +32,7 @@ def stars(value, name=None):
         return 0
 
     if name is None:
-        return mark_safe('''<div data-raty data-raty-score="{0}"></div>'''.format(value))
+        return mark_safe('''<div data-raty data-raty-score="{0}"><meta itemprop="ratingValue" content="{0}"></div>'''.format(value))
     else:
         return mark_safe('''<div data-raty data-raty-score="{0}" data-raty-editable></div>'''.format(value))
 

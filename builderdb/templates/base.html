@@ -32,6 +32,8 @@
 {{ site.name }}
 {% endblock title %}
 
+{% block body_attr %}itemscope itemtype="http://schema.org/WebPage"{% endblock body_attr %}
+
 {% block base_body %}
 {% sitetree_menu from 'accounts' include 'trunk' %}
 {% block content %}
@@ -39,7 +41,7 @@
 
 {% endblock content %}
 <footer>
-This website is released under the terms of the GNU Affero General Public License.
+This website is released under the terms of the <a href="http://www.gnu.org/licenses/agpl-3.0-standalone.html">GNU Affero General Public License</a>.
 The full source is available at: <a href="https://github.com/Vypo/builderdb">https://github.com/Vypo/builderdb</a>.
 </footer>
 {% endblock base_body %}

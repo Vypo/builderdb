@@ -1,25 +1,25 @@
 {% load humanize %}
 {% load builders %}
-<article class="review">
+<article class="review" itemprop="review" itemscope itemtype="http://schema.org/Review">
 <div class="row">
     <div class="columns small-12">
 	<header>
-	    <h3 class="review-costume-name">
+	    <h3 class="review-costume-name" itemprop="itemReviewed">
 		{{ review.costume_name }}{% if review.user == request.user %} <span class="sub"><a href="{% url 'review.edit' review.builder.slug review.slug %}">edit</a></span>{% endif %}
 	    </h3>
 	    <div class="review-costume-info">
             by
             <span class="author">
-                <span class="user-link">
+                <span class="user-link" itemprop="author">
                 {{ review.user.username }}
                 </span>
             </span>
             <span class="date">
-                <time datetime="{{ review.created|date:'Y-m-d' }}T{{ review.created|date:'H:i:sO' }}">{{ review.created|naturaltime }}</time>
+                <time datetime="{{ review.created|date:'Y-m-d' }}T{{ review.created|date:'H:i:sO' }}" itemprop="dateCreated">{{ review.created|naturaltime }}</time>
                 {% if review.edited != review.created %}
                 <span class="edited">
                 (edited
-                <time datetime="{{ review.edited|date:'Y-m-d' }}T{{ review.edited|date:'H:i:sO' }}">{{ review.edited|naturaltime }}</time>)
+                <time datetime="{{ review.edited|date:'Y-m-d' }}T{{ review.edited|date:'H:i:sO' }}" itemprop="dateModified">{{ review.edited|naturaltime }}</time>)
                 </span>
                 {% endif %}
             </span>
@@ -31,7 +31,7 @@
     <div class="columns small-12 medium-3 medium-push-9 review-gallery">
         <ul class="small-block-grid-3 medium-block-grid-1">
             {% for photo in review.photos.all|slice:':3' %}
-            <li><a href="{% url 'photo.detail' builder.slug review.slug photo.pk %}"><img src="{{ photo.image.thumb.url }}" alt="{{ photo.caption }}"></a></li>
+            <li><a href="{% url 'photo.detail' builder.slug review.slug photo.pk %}" itemprop="image"><img src="{{ photo.image.thumb.url }}" alt="{{ photo.caption }}"></a></li>
             {% empty %}
             <li>No Photos</li>
             {% endfor %}
@@ -42,9 +42,9 @@
         {% include 'builders/rating_snippet.html' %}
         {% endwith %}
     </div><!-- /.review-ratings -->
-    <div class="columns small-12 medium-9 medium-pull-3 markdown">
+    <div class="columns small-12 medium-9 medium-pull-3 markdown" itemprop="description">
 	{{ review.text.rendered|safe|truncatechars_html:500 }}
-	<a href="{{ review.get_absolute_url}}">(read more)</a>
+	<a href="{{ review.get_absolute_url}}" itemprop="url">(read more)</a>
     </div>
 </div>
 </article>

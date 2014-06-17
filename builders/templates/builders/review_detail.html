@@ -11,34 +11,34 @@
 
 {% block builders_content %}
 {{ block.super }}
-<div class="row">
+<div class="row" itemscope itemtype="http://schema.org/Review">
     <div class="columns small-12 medium-8">
         <div class="panel">
             <article>
                 <header>
-                    <h3 class="review-costume-name">
+                    <h3 class="review-costume-name" itemprop="itemReviewed">
                         {{ review.costume_name }}{% if review.user == request.user %} <span class="sub"><a href="{% url 'review.edit' review.builder.slug review.slug %}">edit</a></span>{% endif %}
                     </h3>
                     <div class="review-costume-info">
                         by
                         <span class="author">
-                            <span class="user-link">
+                            <span class="user-link" itemprop="author">
                             {{ review.user.username }}
                             </span>
                         </span>
                         <span class="date">
-                            <time datetime="{{ review.created|date:'Y-m-d' }}T{{ review.created|date:'H:i:sO' }}">{{ review.created|naturaltime }}</time>
+                            <time datetime="{{ review.created|date:'Y-m-d' }}T{{ review.created|date:'H:i:sO' }}" itemprop="dateCreated">{{ review.created|naturaltime }}</time>
                             {% if review.edited != review.created %}
                             <span class="edited">
                             (edited
-                            <time datetime="{{ review.edited|date:'Y-m-d' }}T{{ review.edited|date:'H:i:sO' }}">{{ review.edited|naturaltime }}</time>)
+                            <time datetime="{{ review.edited|date:'Y-m-d' }}T{{ review.edited|date:'H:i:sO' }}" itemprop="dateModified">{{ review.edited|naturaltime }}</time>)
                             </span>
                             {% endif %}
                         </span>
                     </div>
                 </header>
                 <hr>
-                <div class="markdown">
+                <div class="markdown" itemprop="reviewBody">
                     {{ review.text.rendered|safe }}
                 </div>
             </article>
@@ -59,7 +59,7 @@
                 <ul class="small-block-grid-3 medium-block-grid-2">
                     {% for photo in review.photos.all %}
                     <li>
-                        <a href="{% url 'photo.detail' builder.slug review.slug photo.pk %}">
+                        <a itemprop="image" href="{% url 'photo.detail' builder.slug review.slug photo.pk %}">
                             <img src="{{ photo.image.thumb.url }}" alt="{{ photo.caption }}">
                         </a>
                     </li>

@@ -6,7 +6,7 @@
 
 
 {% block builders_content %}
-<div class="row">
+<div class="row" itemscope itemtype="http://schema.org/Organization">
     <div class="columns small-12 medium-4 medium-push-8">
         <div class="panel builder-status-panel">
             <h5>Status{% if editable %} <span class="sub"><a href="{% url 'builder.edit' builder.slug %}">edit</a></span>{% endif %}</h5>
@@ -21,21 +21,33 @@
             <hr>
             <table class="review-ratings">
                 <tbody>
-                    <tr>
-                        <th>Overall</th>
-                        <td>{{ builder.overall|stars }}</td>
+                    <tr itemscope itemtype="http://schema.org/AggregateRating" itemprop="aggregateRating">
+                        <th itemprop="name">Overall</th>
+                        <td>
+                            {{ builder.overall|stars }}
+                            <meta itemprop="reviewCount" content="{{ builder.reviews.count }}">
+                        </td>
                     </tr>
-                    <tr>
-                        <th>Construction</th>
-                        <td>{{ builder.construction|stars }}</td>
+                    <tr itemscope itemtype="http://schema.org/AggregateRating">
+                        <th itemprop="name">Construction</th>
+                        <td>
+                            {{ builder.construction|stars }}
+                            <meta itemprop="reviewCount" content="{{ builder.reviews.count }}">
+                        </td>
                     </tr>
-                    <tr>
-                        <th>Communication</th>
-                        <td>{{ builder.communication|stars }}</td>
+                    <tr itemscope itemtype="http://schema.org/AggregateRating">
+                        <th itemprop="name">Communication</th>
+                        <td>
+                            {{ builder.communication|stars }}
+                            <meta itemprop="reviewCount" content="{{ builder.reviews.count }}">
+                        </td>
                     </tr>
-                    <tr>
-                        <th>Timeliness</th>
-                        <td>{{ builder.timeliness|stars }}</td>
+                    <tr itemscope itemtype="http://schema.org/AggregateRating">
+                        <th itemprop="name">Timeliness</th>
+                        <td>
+                            {{ builder.timeliness|stars }}
+                            <meta itemprop="reviewCount" content="{{ builder.reviews.count }}">
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -47,7 +59,7 @@
             <ul class="builder-user-list">
                 {% for user in builder.users.all %}
                 <li class="builder-user-entry">
-                    <span class="user-link">
+                    <span class="user-link" itemprop="member">
                         {% avatar user 25 %}
                         {{ user.username }}
                     </span>
@@ -62,7 +74,7 @@
             <ul class="builder-site-list">
                 {% for site in builder.other_sites.all %}
                 <li class="builder-site-entry">
-                    <a rel="nofollow" href="{{ site.url }}">
+                    <a rel="nofollow" href="{{ site.url }}" itemprop="sameAs">
                         <img class="favicon" alt="favicon" src="//g.etfv.co/{{ site.url|urlencode }}">
                         {{ site.human_url }}
                     </a>
@@ -81,7 +93,7 @@
         <div class="panel">
             <h5>About{% if editable %} <span class="sub"><a href="{% url 'builder.edit' builder.slug %}">edit</a></span>{% endif %}</h5>
             <hr>
-            <div class="markdown">
+            <div class="markdown" itemprop="description">
                 {{ builder.description.rendered|safe }}
             </div>
         </div>

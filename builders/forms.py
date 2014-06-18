@@ -139,6 +139,8 @@ class ReviewForm(forms.ModelForm):
             'construction': RatyWidget,
             'communication': RatyWidget,
             'timeliness': RatyWidget,
+            'commission_date': forms.DateInput(attrs={'placeholder': 'yyyy-mm-dd'}),
+            'received_date': forms.DateInput(attrs={'placeholder': 'yyyy-mm-dd'}),
         }
 
     def __init__(self, *args, **kwargs):

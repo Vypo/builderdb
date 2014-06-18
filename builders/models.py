@@ -30,6 +30,8 @@ from markupfield.fields import MarkupField
 from math import ceil
 from decimal import Decimal, ROUND_CEILING
 
+_markdown_help_text = 'you can use <a href="https://daringfireball.net/projects/markdown/basics" rel="nofollow">markdown</a> for formatting here'
+
 class Photo(models.Model):
     class Meta:
         ordering = ['-priority', '-edited']
@@ -93,7 +95,7 @@ class Builder(models.Model):
     banner = ThumbnailerImageField(upload_to='headers')
     thumb = ThumbnailerImageField(upload_to='thumbs', verbose_name='thumbnail')
     description = MarkupField(blank=True,  markup_type='markdown',
-                                escape_html=True)
+                                escape_html=True, help_text=_markdown_help_text)
 
     @property
     def overall(self):
@@ -144,9 +146,11 @@ class Review(models.Model):
 
     costume_name = models.CharField(max_length=1024)
     slug = AutoSlugField(populate_from='costume_name', unique_with=['builder'])
-    text = MarkupField(escape_html=True, markup_type='markdown')
-    commission_date = models.DateField()
-    received_date = models.DateField(blank=True, null=True)
+    text = MarkupField(escape_html=True, markup_type='markdown',
+                        help_text=_markdown_help_text)
+    commission_date = models.DateField(help_text='when you placed your commission')
+    received_date = models.DateField(blank=True, null=True,
+                        help_text='when you received your costume')
 
     photos = GenericRelation(Photo, related_query_name='reviews')
 

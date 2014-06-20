@@ -3,23 +3,13 @@
 {% load sitetree %}
 {% load foundation_tags %}
 
-{# Have to fix the static files references for foundation #}
 {% block foundation_css %}
-<link rel="stylesheet" href="{% static 'foundation/css/normalize.css' %}" type="text/css">
-<link rel="stylesheet" href="{% static 'foundation/css/foundation.min.css' %}" type="text/css">
+{{ block.super }}
 <link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css">
 {% endblock foundation_css %}
 
-{% block foundation_modernizer %}
-<script type="text/javascript" src="{% static 'foundation/js/vendor/modernizr.js' %}"></script>
-{% endblock foundation_modernizer %}
-
-{% block foundation_jquery %}
-<script type="text/javascript" src="{% static 'foundation/js/vendor/jquery.js' %}"></script>
-{% endblock foundation_jquery %}
-
 {% block foundation_js %}
-<script type="text/javascript" src="{% static 'foundation/js/foundation.min.js' %}"></script>
+{{ block.super }}
 <script type="text/javascript" src="{% static 'foundation/js/foundation/foundation.topbar.js' %}"></script>
 {% endblock foundation_js %}
 

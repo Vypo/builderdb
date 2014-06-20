@@ -19,3 +19,11 @@ textarea + .hint,
 input + .hint {
     margin-top: -1rem;
 }
+
+/*
+ * Allauth
+ */
+.emailTable input[name="email"] {
+    /* Remove the space foundation inserts under radio buttons */
+    margin:0;
+}

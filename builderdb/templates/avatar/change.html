@@ -1,0 +1,35 @@
+{% extends "avatar/base.html" %}
+{% load i18n avatar_tags crispy_forms_tags %}
+{% load url from future %}
+
+{% block head_title %}Change Avatar{% endblock %}
+{% block accounts_content %}
+    <fieldset>
+        <legend>{% trans 'Current Avatar' %}</legend>
+        {% avatar user %}
+    </fieldset>
+    <fieldset>
+        <legend>{% trans 'Primary Avatar' %}</legend>
+        {% if not avatars %}
+            <p>{% trans "You haven't uploaded an avatar yet. Please upload one now." %}</p>
+        {% else %}
+            <form method="POST" action="{% url 'avatar_change' %}">
+                {{ primary_avatar_form|crispy }}
+                {% csrf_token %}
+                <div class="button-holder">
+                    <input class="button submit" type="submit" value="{% trans "Choose new Default" %}">
+                </div>
+            </form>
+        {% endif %}
+    </fieldset>
+    <fieldset>
+        <legend>{% trans 'Add Avatar' %}</legend>
+        <form enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}">
+            {{ upload_avatar_form|crispy }}
+            {% csrf_token %}
+            <div class="button-holder">
+                <input class="button submit" type="submit" value="{% trans "Upload New Image" %}">
+            </div>
+        </form>
+    </fieldset>
+{% endblock %}

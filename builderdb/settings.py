@@ -207,6 +207,10 @@ THUMBNAIL_ALIASES = {
     }
 }
 
+# Avatar
+# http://django-avatar.readthedocs.org/
+AVATAR_GRAVATAR_BASE_URL = '//www.gravatar.com/avatar/'
+
 # Builders
 BUILDERS_BLACKLIST = ('accounts', 'media', 'admin', 'sitemap', '__debug__',
                         'autocomplete', 'pages', 'static')

@@ -46,10 +46,16 @@ h6 > .sub {
     font-variant: small-caps;
     font-family: 'aatrofmocregular', sans-serif;
     font-size:1.5rem;
+    line-height:1.1;
 
     bottom: 1.2rem;
     left: 1rem;
     right: 1rem;
+}
+
+.builder-entry-text .builder-rating {
+    font-size: initial;
+    line-height: 1.5rem;
 }
 
 .builder-status-panel .builder-status {

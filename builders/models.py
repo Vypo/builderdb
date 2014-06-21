@@ -18,6 +18,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with BuilderDB.  If not, see <http://www.gnu.org/licenses/>.
 from django.db import models
+from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import (GenericForeignKey,
@@ -69,6 +71,13 @@ class BuilderManager(models.Manager):
             timeliness=models.Avg('reviews__timeliness')
         )
 
+def _validate_builder_name(value):
+    '''Checks the builder name against a black list in django settings'''
+    if hasattr(settings, 'BUILDERS_BLACKLIST'):
+        if value in settings.BUILDERS_BLACKLIST:
+            raise ValidationError(u'This name is not available')
+
+
 class Builder(models.Model):
     class Meta:
         ordering = ['name']
@@ -87,7 +96,8 @@ class Builder(models.Model):
 
     objects = BuilderManager()
 
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255, unique=True,
+                            validators=[_validate_builder_name])
     slug = AutoSlugField(populate_from='name', unique=True)
     status = models.CharField(max_length=16, choices=STATUS_CHOICES)
     users = models.ManyToManyField(User, related_name='builders',

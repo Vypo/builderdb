@@ -207,6 +207,10 @@ THUMBNAIL_ALIASES = {
     }
 }
 
+# Builders
+BUILDERS_BLACKLIST = ('accounts', 'media', 'admin', 'sitemap', '__debug__',
+                        'autocomplete', 'pages', 'static')
+
 try:
     from .local_settings import local_settings
     local_settings(globals())

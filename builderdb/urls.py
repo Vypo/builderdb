@@ -50,6 +50,7 @@ urlpatterns = [
     url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^pages/privacy/$', views.flatpage, {'url': '/pages/privacy/'}, name='flat_privacy'),
     url(r'^pages/terms/$', views.flatpage, {'url': '/pages/terms/'}, name='flat_terms'),
+    url(r'^pages/about/$', views.flatpage, {'url': '/pages/about/'}, name='flat_about'),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^accounts/avatar/', include('avatar.urls')),

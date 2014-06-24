@@ -85,6 +85,7 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'avatar',
     'sitetree',
+    'notification',
 
     'builders',
     'accounts',

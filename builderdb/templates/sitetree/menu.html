@@ -1,23 +1,11 @@
 {% load sitetree %}
-<nav class="top-bar" data-topbar>
-    <ul class="title-area">
-        <li class="name">
-            <h1><a href="/">{{ site.name }}</a></h1>
-        </li>
-        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-    </ul>
-    <section class="top-bar-section">
-        <ul class="right">
-            {% for item in sitetree_items %}
-            <li class="{% if item.is_current or item.in_current_branch %}active{% endif %} {% if item.has_children %}has-flyout{% endif %}">
-                <a href="{% if item.has_children %}#{% else %}{% sitetree_url for item %}{% endif %}">{{ item.title_resolved }}</a>
-                {% if item.has_children %}
-                    <a href="#" class="flyout-toggle"><span> </span></a>
-                    {% sitetree_children of item for menu template "sitetree/menu_foundation_flyout.html" %}
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-
-    </section>
-</nav>
+{% for item in sitetree_items %}
+<li class="{% if item.is_current or item.in_current_branch %}active{% endif %} {% if item.has_children %}has-dropdown{% endif %}">
+    {% if item.has_children %}
+        <a href="#">{{ item.title_resolved }}</a>
+        {% sitetree_children of item for menu template "sitetree/menu_foundation_flyout.html" %}
+    {% else %}
+        <a href="{% sitetree_url for item %}">{{ item.title_resolved }}</a>
+    {% endif %}
+</li>
+{% endfor %}

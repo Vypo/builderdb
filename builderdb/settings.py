@@ -86,6 +86,7 @@ INSTALLED_APPS = (
     'avatar',
     'sitetree',
     'notification',
+    'postman',
 
     'builders',
     'accounts',
@@ -105,6 +106,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'allauth.account.context_processors.account',
     'allauth.socialaccount.context_processors.socialaccount',
     'django.core.context_processors.request',
+    'postman.context_processors.inbox',
     'builderdb.context_processors.site',
 )
 
@@ -212,9 +214,15 @@ THUMBNAIL_ALIASES = {
 # http://django-avatar.readthedocs.org/
 AVATAR_GRAVATAR_BASE_URL = '//www.gravatar.com/avatar/'
 
+# Postman
+# http://django-postman.readthedocs.org/en/latest/quickstart.html#optional-settings
+POSTMAN_DISALLOW_ANONYMOUS = True
+POSTMAN_AUTO_MODERATE_AS = True     # Accept all by default
+POSTMAN_MAILER_APP = None
+
 # Builders
 BUILDERS_BLACKLIST = ('accounts', 'media', 'admin', 'sitemap', '__debug__',
-                        'autocomplete', 'pages', 'static')
+                        'autocomplete', 'pages', 'static', 'messages')
 
 try:
     from .local_settings import local_settings

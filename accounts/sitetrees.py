@@ -37,4 +37,14 @@ sitetrees = (
         ]),
         item('Log Out', 'account_logout', access_loggedin=True),
     ]),
+
+    tree('postman', items=[
+        item('Messages {{ postman_unread_count }}', '/messages/', url_as_pattern=False, access_guest=False, access_loggedin=True, children=[
+            item('Compose', 'postman_write', access_guest=False, access_loggedin=True),
+            item('Inbox', 'postman_inbox', access_guest=False, access_loggedin=True),
+            item('Sent', 'postman_sent', access_guest=False, access_loggedin=True),
+            item('Archive', 'postman_archives', access_guest=False, access_loggedin=True),
+            item('Trash', 'postman_trash', access_guest=False, access_loggedin=True)
+        ])
+    ])
 )

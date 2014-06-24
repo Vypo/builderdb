@@ -26,7 +26,21 @@
 {% block body_attr %}itemscope itemtype="http://schema.org/WebPage"{% endblock body_attr %}
 
 {% block base_body %}
-{% sitetree_menu from 'accounts' include 'trunk' %}
+<nav class="top-bar" data-topbar>
+    <ul class="title-area">
+        <li class="name">
+            <h1><a href="/">{{ site.name }}</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+        <ul class="right">
+        {% sitetree_menu from 'postman' include 'trunk' %}
+        {% sitetree_menu from 'accounts' include 'trunk' %}
+        </ul>
+    </section>
+</nav>
+
 {% block content %}
 {% include 'message_snippet.html' %}
 

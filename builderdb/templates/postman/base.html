@@ -3,19 +3,30 @@
 {% load url from future %}
 {% load i18n %}
 {% load postman_tags %}
-{% block title %}{% trans "Messaging" %}{% endblock %}
+{% load sitetree %}
 {% block css %}{{ block.super }}
 <link type="text/css" media="all" rel="stylesheet" href="
 {% static 'postman/css/postman.css' %}">
 {% block extrahead %}{% endblock %}
 {% endblock %}
 
-{% block postman_menu %}
-<ul id="postman_menu">{% postman_unread as unread_count %}
- <li><a href="{% url 'postman_inbox' %}">&raquo;&nbsp;{% trans "Inbox" %}{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</a></li>
- <li><a href="{% url 'postman_sent' %}">&raquo;&nbsp;{% trans "Sent Messages" %}</a></li>
- <li><a href="{% url 'postman_write' %}">&raquo;&nbsp;{% trans "Write" %}</a></li>
- <li><a href="{% url 'postman_archives' %}">&raquo;&nbsp;{% trans "Archives" %}</a></li>
- <li><a href="{% url 'postman_trash' %}">&raquo;&nbsp;{% trans "Trash" %}</a></li>
-</ul>
-{% endblock %}
+{% block title %}
+{% sitetree_page_title from 'postman' %} | {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+{% sitetree_breadcrumbs from 'postman' %}
+{{ block.super }}
+
+<div class="row">
+    <div class="columns small-12">
+        <div class="panel">
+        <h5>{% sitetree_page_title from 'postman' %}</h5>
+        <hr>
+{% block postman_content %}
+{% endblock postman_content %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

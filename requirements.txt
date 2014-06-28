@@ -1,5 +1,5 @@
 git+https://github.com/django/django.git@stable/1.7.x#Django
-hg+http://bitbucket.org/psam/django-postman/#django-postman
+hg+https://bitbucket.org/Vypo/django-postman#django-postman
 Markdown==2.4
 Pillow==2.4.0
 argparse==1.2.1

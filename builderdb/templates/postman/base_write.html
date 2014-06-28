@@ -22,9 +22,8 @@
 " />{# else: for version 1.2.x use AJAX_SELECT_BOOTSTRAP + AJAX_SELECT_INLINES or arrange to include jqueryUI/js/css #}{% endif %}{% endif %}
 {% endif %}
 {% endblock %}
-{% block content %}
+{% block postman_content %}
 <div id="postman">
-<h1>{% block pm_write_title %}{% endblock %}</h1>
 <form action="{% if next_url %}?next={{ next_url|urlencode }}{% endif %}" method="post">{% csrf_token %}
 <table>
 {% block pm_write_recipient %}{% endblock %}

@@ -39,12 +39,19 @@ sitetrees = (
     ]),
 
     tree('postman', items=[
-        item('Messages {{ postman_unread_count }}', '/messages/', url_as_pattern=False, access_guest=False, access_loggedin=True, children=[
+        item('Messages', '/messages/', url_as_pattern=False, access_guest=False, access_loggedin=True, children=[
             item('Compose', 'postman_write', access_guest=False, access_loggedin=True),
             item('Inbox', 'postman_inbox', access_guest=False, access_loggedin=True),
+            item('Inbox', 'postman_inbox m', access_guest=False, access_loggedin=True, in_menu=False, in_sitetree=False),
             item('Sent', 'postman_sent', access_guest=False, access_loggedin=True),
+            item('Sent', 'postman_sent m', access_guest=False, access_loggedin=True, in_menu=False, in_sitetree=False),
             item('Archive', 'postman_archives', access_guest=False, access_loggedin=True),
-            item('Trash', 'postman_trash', access_guest=False, access_loggedin=True)
+            item('Archive', 'postman_archives m', access_guest=False, access_loggedin=True, in_menu=False, in_sitetree=False),
+            item('Trash', 'postman_trash', access_guest=False, access_loggedin=True),
+            item('Trash', 'postman_trash m', access_guest=False, access_loggedin=True, in_menu=False, in_sitetree=False),
+            item('View Message', 'postman_view pm_messages.0.id', access_guest=False, access_loggedin=True, in_menu=False, in_sitetree=False),
+            item('View Message', 'postman_view_conversation pm_messages.0.thread_id', access_guest=False, access_loggedin=True, in_menu=False, in_sitetree=False),
+            item('Reply', 'postman_reply parent.id', access_guest=False, access_loggedin=True, in_menu=False, in_sitetree=False),
         ])
     ])
 )

@@ -24,11 +24,16 @@ input + .hint {
 }
 
 /*
- * Allauth
+ * Allauth, and postman
  */
-.emailTable input[name="email"] {
+.emailTable input[name="email"],
+#pm_messages input[type="checkbox"] {
     /* Remove the space foundation inserts under radio buttons */
     margin:0;
+}
+
+#pm_messages {
+    width:100%;
 }
 
 /*

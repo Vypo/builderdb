@@ -49,7 +49,7 @@ in the INSTALLED_APPS setting.
  </tbody>
 </table>
 {% block pm_form_buttons %}<span id="pm_buttons">
-{% block pm_delete_button %}<button type="submit" onclick="this.form.action='{% url 'postman_delete' %}'">{% trans "Delete" %}</button>{% endblock %}
+{% block pm_delete_button %}<button type="submit" class="button alert" onclick="this.form.action='{% url 'postman_delete' %}'">{% trans "Delete" %}</button>{% endblock %}
 {% block pm_archive_button %}<button type="submit" onclick="this.form.action='{% url 'postman_archive' %}'">{% trans "Archive" %}</button>{% endblock %}
 {% block pm_undelete_button %}<button type="submit" onclick="this.form.action='{% url 'postman_undelete' %}'">{% trans "Undelete" %}</button>{% endblock %}
 </span>{% endblock %}

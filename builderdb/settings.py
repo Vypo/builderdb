@@ -87,6 +87,7 @@ INSTALLED_APPS = (
     'sitetree',
     'notification',
     'postman',
+    'haystack',
 
     'builders',
     'accounts',
@@ -219,6 +220,15 @@ AVATAR_GRAVATAR_BASE_URL = '//www.gravatar.com/avatar/'
 POSTMAN_DISALLOW_ANONYMOUS = True
 POSTMAN_AUTO_MODERATE_AS = True     # Accept all by default
 POSTMAN_MAILER_APP = None
+
+# Haystack
+# http://django-haystack.readthedocs.org/en/latest/tutorial.html#whoosh
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index')
+    }
+}
 
 # Builders
 BUILDERS_BLACKLIST = ('accounts', 'media', 'admin', 'sitemap', '__debug__',

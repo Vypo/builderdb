@@ -25,3 +25,5 @@ requests-oauthlib==0.4.0
 six==1.6.1
 sqlparse==0.1.11
 wsgiref==0.1.2
+Whoosh==2.6.0
+django-haystack==2.1.0

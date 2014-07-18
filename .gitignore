@@ -8,6 +8,7 @@
 # Development Files
 db.sqlite3
 venv/
+whoosh_index/
 
 # Static Files
 /media/

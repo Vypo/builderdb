@@ -22,6 +22,7 @@ from sitetree.utils import tree, item
 sitetrees = (
     tree('builders', items=[
         item('Builders', 'builder.list', children=[
+            item('Search', 'builder.search', in_menu=False, in_sitetree=False),
             item('{{ builder.name }}', 'builder.detail builder.slug', in_menu=False, in_sitetree=False, children=[
                 item('Reviews', 'review.list builder.slug', in_menu=False, in_sitetree=False, children=[
                     item('{{ review.costume_name }} by {{ builder.name }}', 'review.detail builder.slug review.slug', in_menu=False, in_sitetree=False, children=[

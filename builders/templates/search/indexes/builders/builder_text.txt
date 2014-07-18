@@ -1,0 +1,7 @@
+{{ object.name }}
+
+{% for user in object.users.all %}
+    {{ user.username }}
+{% endfor %}
+
+{{ object.description }}

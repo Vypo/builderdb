@@ -1,0 +1,92 @@
+{% extends "builders/base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% load builders %}
+{% load crispy_forms_tags %}
+
+{% block builders_header %}
+{% endblock builders_header %}
+
+{% block builders_content %}
+<div class="row">
+    <div class="colmuns small-12">
+        <header>
+            <h1>
+                <img src="{% static 'builders/img/banner.png' %}" alt="{{ site.name }} Search">
+            </h1>
+        </header>
+    </div>
+</div>
+<div class="row">
+    <div class="columns small-12">
+        <div class="panel">
+            <form method="GET" action=".">
+                <div class="row collapse">
+                    <div class="columns small-9 medium-10 large-11">
+                        {{ form.q }}
+                    </div>
+                    <div class="columns small-3 medium-2 large-1">
+                        <button type="submit" class="button postfix">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% if query %}
+<div class="row">
+    <div class="columns small-12 builder-list">
+        <ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
+        {% for builder in page.object_list %}
+            <li class="builder-entry">
+                <a href="{{ builder.object.get_absolute_url }}">
+                    <div class="builder-entry-text">
+                        <div class="builder-name">
+                            {{ builder.object.name }}
+                        </div><!-- /.builder-name -->
+                        <div class="builder-rating">
+                            {{ builder.object.overall|stars }}
+                        </div><!-- /.builder-rating -->
+                        <div class="builder-status">
+                            {{ builder.object.status }}
+                        </div><!-- /.builder-status -->
+                    </div><!-- /.builder-entry-text -->
+                    <img src="{{ builder.object.thumb.square.url }}">
+                </a>
+            </li>
+        {% empty %}
+            <li>No results found :(</li>
+        {% endfor %}
+        </ul><!-- /.builder-list -->
+        <div class="pagination-centered">
+            <ul class="pagination">
+                <li class="arrow{% if not page.has_previous %} unavailable{% endif %}">
+                    {% if page.has_previous %}
+                    <a href="{% url 'builder.search' %}?q={{ query|urlencode:"" }}&amp;page={{ page.previous_page_number }}">
+                    {% else %}
+                    <a>
+                    {% endif %}
+                        &laquo;
+                    </a>
+                </li>
+                {% for page_number in page.paginator.page_range %}
+                <li{% if page_number == page.number %} class="current"{% endif %}>
+                    <a href="{% url 'builder.search' %}?q={{ query|urlencode:"" }}&amp;page={{ page_number }}">{{ page_number }}</a>
+                </li>
+                {% endfor %}
+                <li class="arrow{% if not page.has_next %} unavailable{% endif %}">
+                    {% if page.has_next %}
+                    <a href="{% url 'builder.search' %}?q={{ query|urlencode:"" }}&amp;page={{ page.next_page_number }}">
+                    {% else %}
+                    <a>
+                    {% endif %}
+                        &raquo;
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock builders_content %}
+

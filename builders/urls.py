@@ -18,6 +18,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with BuilderDB.  If not, see <http://www.gnu.org/licenses/>.
 from django.conf.urls import include, url
+from haystack.views import SearchView
 from .views import (BuilderListView, BuilderDetailView, BuilderUpdateView,
                     BuilderDeleteView, ReviewListView, ReviewDetailView,
                     ReviewUpdateView, ReviewCreateView, PhotoCreateView,
@@ -25,6 +26,7 @@ from .views import (BuilderListView, BuilderDetailView, BuilderUpdateView,
 
 urlpatterns = [
     url(r'^$', BuilderListView.as_view(), name='builder.list'),
+    url(r'^search/', SearchView(template='builders/search.html'), name='builder.search'),
     url(r'^(?P<slug>[\w-]+)/$', BuilderDetailView.as_view(), name='builder.detail'),
     url(r'^(?P<slug>[\w-]+)/update/$', BuilderUpdateView.as_view(), name='builder.edit'),
     url(r'^(?P<slug>[\w-]+)/delete/$', BuilderDeleteView.as_view(), name='builder.delete'),
